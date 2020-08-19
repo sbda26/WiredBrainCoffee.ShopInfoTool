@@ -12,22 +12,28 @@ namespace WiredBrainCoffee.ShopInfoTool
         {
             Console.WriteLine("Wired Brain Coffee - Shop Info Tool!");
 
-            Console.WriteLine("Write 'help' to list available commands");
+            Console.WriteLine("Write 'help' to list available commands, " +
+                "write 'quit' to exit application");
 
             var coffeeShopDataProvider = new CoffeeShopDataProvider();
 
             while (true)
             {
                 string line = Console.ReadLine();
-                IEnumerable<CoffeeShop> coffeeShops = coffeeShopDataProvider.LoadCoffeeShops();
 
-                if (string.Equals("help", line, StringComparison.OrdinalIgnoreCase))
+                if (string.Equals("quit", line, StringComparison.OrdinalIgnoreCase))
+                    break;
+                else
                 {
-                    Console.WriteLine("> Available coffee shop commands:");
-                    foreach (CoffeeShop coffeeShop in coffeeShops)
-                        Console.WriteLine($"> {coffeeShop.Location}");
-                }
+                    IEnumerable<CoffeeShop> coffeeShops = coffeeShopDataProvider.LoadCoffeeShops();
 
+                    if (string.Equals("help", line, StringComparison.OrdinalIgnoreCase))
+                    {
+                        Console.WriteLine("> Available coffee shop commands:");
+                        foreach (CoffeeShop coffeeShop in coffeeShops)
+                            Console.WriteLine($"> {coffeeShop.Location}");
+                    }
+                }
             }
         }
     }
